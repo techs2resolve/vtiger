@@ -1,10 +1,11 @@
 #!/bin/bash
 
+ERROR_REPORTING="E_WARNING & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT"
 rm -rf /var/www/html/*
 #echo "<?php phpinfo(); ?>" > /var/www/html/index.php
 sed -i "s/display_errors = Off/display_errors = On/" /etc/php/5.6/apache2/php.ini
 sed -i "s/max_execution_time = 30/max_execution_time = 0/" /etc/php/5.6/apache2/php.ini
-#sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_WARNING & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT/" /etc/php/5.6/apache2/php.ini
+sed -i "s/error_reporting = .*/error_reporting = ${ERROR_REPORTING}/" /etc/php/5.6/apache2/php.ini
 sed -i "s/log_errors = On/log_errors = Off/" /etc/php/5.6/apache2/php.ini
 sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php/5.6/apache2/php.ini
 
